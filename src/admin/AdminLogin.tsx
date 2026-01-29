@@ -32,18 +32,21 @@ const AdminLogin = () => {
   };
 
   return (
-    <div className="min-h-screen bg-black flex items-center justify-center px-4">
-      <div className="w-full max-w-md bg-[#070707] border border-[#1b1b1b] p-8 rounded">
-        <h1 className="text-2xl font-semibold uppercase text-white mb-6">
+    <div className="admin-theme flex items-center justify-center px-4 py-10">
+      <div className="w-full max-w-md admin-form-card shadow-[0_20px_60px_rgba(0,0,0,0.5)]">
+        <h1 className="text-2xl font-semibold uppercase text-white mb-2 tracking-wide">
           Acceso administrador
         </h1>
+        <p className="text-sm text-slate-300 mb-6">
+          Ingresa con tu correo y contrasena para administrar el sistema.
+        </p>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm text-[#bdbdbd] mb-2">
+            <label className="block text-sm text-[#bdbdbd] mb-2 uppercase tracking-wide">
               Email
             </label>
             <input
-              className="w-full bg-black border border-[#595959] text-white h-[48px] px-4 focus:outline-none"
+              className="admin-input focus:outline-none focus:border-[#2563eb]"
               type="email"
               value={email}
               onChange={(event) => setEmail(event.target.value)}
@@ -51,11 +54,11 @@ const AdminLogin = () => {
             />
           </div>
           <div>
-            <label className="block text-sm text-[#bdbdbd] mb-2">
+            <label className="block text-sm text-[#bdbdbd] mb-2 uppercase tracking-wide">
               Password
             </label>
             <input
-              className="w-full bg-black border border-[#595959] text-white h-[48px] px-4 focus:outline-none"
+              className="admin-input focus:outline-none focus:border-[#2563eb]"
               type="password"
               value={password}
               onChange={(event) => setPassword(event.target.value)}
@@ -63,13 +66,13 @@ const AdminLogin = () => {
             />
           </div>
           {error && (
-            <div className="text-sm text-white bg-[#1a1a1a] border border-[#2a2a2a] px-3 py-2 rounded">
+            <div className="text-sm text-white bg-[#111827] border border-[#1f2937] px-3 py-2 rounded">
               {error}
             </div>
           )}
           <button
             type="submit"
-            className="w-full h-[48px] bg-[#ff5100] text-white font-semibold uppercase"
+            className="w-full h-[50px] bg-[#2563eb] text-white font-semibold uppercase tracking-wide hover:opacity-90 transition-all duration-200 rounded"
             disabled={loading}
           >
             {loading ? "Ingresando..." : "Ingresar"}

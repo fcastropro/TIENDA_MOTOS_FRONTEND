@@ -10,7 +10,7 @@ const HeaderData = {
   logo: logo,
   logo2: logo2,
   btntext: "Ingresar ",
-  btnlink: "#",
+  btnlink: "/admin/login",
   Menu: [
     {
       title: "Inicio",
@@ -161,6 +161,7 @@ const Header = () => {
                     <li className="m-0">
                       <Link
                         to={HeaderData.btnlink}
+                        reloadDocument
                         className="magic-hover magic-hover__square text-sm font-semibold uppercase font-antonio text-white hover:text-[#ff5100]"
                       >
                         <i className="fa fa-long-arrow-left mr-[5px]"></i> 

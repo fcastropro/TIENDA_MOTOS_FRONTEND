@@ -9,6 +9,7 @@ import "./assets/css/fontawesome-all.min.css";
 import "./assets/css/progressBar.min.css";
 import "./assets/css/color/color1.css";
 import "./index.css";
+import "./admin/admin-theme.css";
 import "swiper/css";
 import "../node_modules/aos/dist/aos.css";
 import "../node_modules/react-modal-video/css/modal-video.css";

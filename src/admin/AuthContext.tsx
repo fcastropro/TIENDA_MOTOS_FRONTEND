@@ -23,6 +23,7 @@ type AuthContextValue = {
 };
 
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
+const STORAGE_KEY = "admin_user";
 
 const isAdminRoleName = (role?: UserRole | string) => {
   if (!role) {
@@ -51,13 +52,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
         credentials: "include",
       });
       if (!response.ok) {
-        setUser(null);
         return;
       }
       const data = (await response.json()) as AuthUser;
       setUser(data);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
     } catch (error) {
-      setUser(null);
+      // keep existing user if request fails
     }
   };
 
@@ -96,6 +97,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       const data = (await response.json()) as AuthUser;
       if (data && typeof data === "object") {
         setUser(data);
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
         return;
       }
     } catch (parseError) {
@@ -115,11 +117,20 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
       // ignore network errors on logout
     } finally {
       setUser(null);
+      localStorage.removeItem(STORAGE_KEY);
     }
   };
 
   useEffect(() => {
     const bootstrap = async () => {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) {
+        try {
+          setUser(JSON.parse(stored));
+        } catch (error) {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
       setLoading(true);
       await refresh();
       setLoading(false);
